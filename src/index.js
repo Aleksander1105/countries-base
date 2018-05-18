@@ -1,8 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { render } from 'react-dom';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import store from './store';
+import { getCountries } from './actions/actions-countries.js';
+import DevTools from './devTools';
+import routes from './routes';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+render(
+	<Provider store={store}>
+		<Router history={hashHistory} routes={routes} />
+	</Provider>,
+	document.getElementById('root')
+); 
+
+store.dispatch(getCountries());
